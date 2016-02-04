@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Discoveri</title>
+	<link rel="stylesheet" href="main.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="app.js"></script>
+</head>
+<body ng-app="discoveri" ng-controller="MainCtrl">
+	<div class="main-content">
+		<h1>Discoveri</h1>
+		<div class="controls">
+			<input type="text" ng-model="search" ng-submit="callArtist()">
+			<button ng-click="callArtist()" value="Beck"></button>
+		</div>
+		<div class="aside-1">
+			<div class="aside">
+				<h2>{{ artist }}</h2>
+				<img ng-show="images" ng-src="{{ images }}" width="200" alt="{{ artist }}">
+				<p>Followers: <span id="followers">{{ followers | number }}</span></p>
+			</div>
+			<div class="aside infobox" ng-show="tracksView">
+				<p>Most popular songs in United States<span ng-click="tracksView = !tracksView">IMG</span></p>
+				<ul class="tracklist">
+					<li ng-repeat="track in topTracks">{{ track.name }}</li>
+				</ul>
+			</div>
+			<div class="aside infobox" ng-hide="tracksView">
+				<p>Popular albums<span ng-click="tracksView = !tracksView">IMG</span></p>
+				<ul class="albumlist">
+					<li ng-repeat="album in albums | orderBy:'-release_date'">
+						<img ng-src="{{ album.images[0].url }}" alt="{{ album.name }}" width="180" height="180">
+						<div class="album-info">
+							<p>{{ album.name }}</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div><!--
+		--><div class="related-artists">
+			<ul id="related">
+				<li ng-repeat="artist in relatedArtists" 
+				ng-style="{
+				'background-image': 'url({{ artist.images[0].url }})',
+				'background-position': 'center',
+				'background-size': 'cover'}"
+				ng-click="callArtist(artist.name)">{{ artist.name }}</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
