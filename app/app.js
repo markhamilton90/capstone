@@ -42,13 +42,11 @@ angular.module('discoveri', [])
 		$scope.callAlbums = function(tracks) {
 			var tracks = tracks;
 			var arrayOfAlbums = [];
-
 			for (var i = 0; i < tracks.length; i++) {
 				if (arrayOfAlbums.indexOf(tracks[i].album.id) > -1) continue; 
 				else arrayOfAlbums.push(tracks[i].album.id);
 	 		}
 	 		var queryString = arrayOfAlbums.join(',');
-
 	 		getAlbums(queryString).then(function(response) {
 	 			$scope.albums = response.data.albums;
 	 		});
@@ -57,28 +55,31 @@ angular.module('discoveri', [])
 
 
 
-		
+
 
 		$scope.callArtist = function(query) {
-			var id;
-			var query = query || $scope.search;
-			getArtist(query)
-			.then(function(response) {
-				id = response.data.artists.items[0].id;
+			getArtist(query).then(function(response) {
 				$scope.artistId = response.data.artists.items[0].id;
 				$scope.images = response.data.artists.items[0].images[0].url;
 				$scope.artist = response.data.artists.items[0].name;
 				$scope.followers = response.data.artists.items[0].followers.total;
+				return response.data.artists.items[0].id;
 			})
-			.then(function() { // both rely on id information from getArtist()
-				$q.all([getRelatedArtists(id), getTracks(id)])
-				.then(function(response) {
-					$scope.relatedArtists = response[0].data.artists;
-					$scope.topTracks = response[1].data.tracks;
-
-					// relies on top tracks information from getTracks()
-					$scope.callAlbums(response[1].data.tracks);
+			.then(function(response) { 
+				// get related artists via artist ID
+				getRelatedArtists(response).then(function(response) {
+					$scope.relatedArtists = response.data.artists;
 				});
+				// get top tracks via artist ID
+				var tracks = getTracks(response).then(function(response) {
+					$scope.topTracks = response.data.tracks;
+					return response.data.tracks;
+				});
+				return tracks;
+			})
+			.then(function(tracks) {
+				// get albums via top tracks
+				$scope.callAlbums(tracks);
 			});
 		}
 
