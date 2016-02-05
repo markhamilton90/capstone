@@ -6,14 +6,16 @@
 	<link rel="stylesheet" href="main.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<script src="bower_components/angular/angular.js"></script>
+	<!--<script src="bower_components/angular-route/angular-route.js"></script>-->
 	<script src="app.js"></script>
 </head>
 <body ng-app="discoveri" ng-controller="MainCtrl">
 	<div class="main-content">
 		<h1>Discoveri</h1>
 		<div class="controls">
-			<input type="text" ng-model="search">
-			<button ng-click="callArtist(search)" value="Beck"></button>
+			<form ng-submit="callArtist(search)">
+				<input type="text" ng-model="search">
+			</form>
 		</div>
 		<div class="aside-1">
 			<div class="aside">
@@ -34,6 +36,7 @@
 						<img ng-src="{{ album.images[0].url }}" alt="{{ album.name }}" width="180" height="180">
 						<div class="album-info">
 							<p>{{ album.name }}</p>
+							<pre>{{ album.release_date | date:'yyyy'}}</pre>
 						</div>
 					</li>
 				</ul>
@@ -41,12 +44,15 @@
 		</div><!--
 		--><div class="related-artists">
 			<ul id="related">
-				<li ng-repeat="artist in relatedArtists" 
-				ng-style="{
-				'background-image': 'url({{ artist.images[0].url }})',
-				'background-position': 'center',
-				'background-size': 'cover'}"
-				ng-click="callArtist(artist.name)">{{ artist.name }}</li>
+				<li ng-repeat="artist in relatedArtists">
+					<div ng-style="{
+						'background-image': 'url({{ artist.images[0].url }})',
+						'background-position': 'center',
+						'background-size': 'cover'}"
+						ng-click="callArtist(artist.name)">	
+					</div>
+					<p>{{ artist.name }}</p>
+				</li>
 			</ul>
 		</div>
 	</div>
