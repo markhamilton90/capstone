@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Discoveri</title>
+	<link rel="stylesheet" href="normalize.css">
 	<link rel="stylesheet" href="main.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<script src="bower_components/angular/angular.js"></script>
@@ -11,12 +12,6 @@
 </head>
 <body ng-app="discoveri" ng-controller="MainCtrl">
 	<div class="main-content">
-		<h1>Discoveri</h1>
-		<div class="controls">
-			<form ng-submit="callArtist(search)">
-				<input type="text" ng-model="search">
-			</form>
-		</div>
 		<div class="aside-1">
 			<div class="aside">
 				<h2>{{ artist }}</h2>
@@ -42,14 +37,19 @@
 				</ul>
 			</div>
 		</div><!--
-		--><div class="related-artists">
+		-->
+		<div class="banner-top">
+			<h1>Discoveri</h1>
+			<form ng-submit="getArtistInfo(search)">
+				<input type="text" ng-model="search" placeholder="Search an artist...">
+			</form>
+		</div>
+		<div class="related-artists">
 			<ul id="related">
 				<li ng-repeat="artist in relatedArtists">
 					<div ng-style="{
-						'background-image': 'url({{ artist.images[0].url }})',
-						'background-position': 'center',
-						'background-size': 'cover'}"
-						ng-click="callArtist(artist.name)">	
+						'background-image': 'url({{ artist.images[0].url }})'}"
+						ng-click="getArtistInfo(artist.name)">	
 					</div>
 					<p>{{ artist.name }}</p>
 				</li>
