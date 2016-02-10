@@ -456,9 +456,14 @@ input:focus {
 	outline: none;
 }
 
+.main-content {
+	height: 100vh;
+	overflow: hidden;
+}
+
 .banner-top {
 	display: inline-block;
-	border: 1px solid black;
+	border-bottom: 2px solid black;
 	width: 70%;
 }
 
@@ -483,17 +488,24 @@ input:focus {
 
 .aside-1 {
 	width: 25%;
+	height: 100%;
 	margin-left: 5%;
 	float: left;
 	display: inline-block;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	background-color: #141317;
+	color: white;
 }
 
 .aside {
 	text-align: center;
 	position: relative;
 	clear: both;
-	border: 1px solid black;
+}
+
+.aside > h2 {
+	font-weight: 300;
 }
 
 #followers {
@@ -501,36 +513,56 @@ input:focus {
 	color: #058aff;
 }
 
+.toggle-display {
+	height: 2.8em;
+}
+
+span.songs,
+span.albums {
+	position: absolute;
+	padding: 5px 10px;
+	border: 1px solid #058aff;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+span.albums {
+	right: 15px;
+}
+
+span.songs {
+	left: 15px;
+}
+
 .tracklist {
-	width: 25em;
+	width: 100%;
 	margin: 0 auto;
-	border: 1px solid #ddd;
+	border-top: 1px solid #2ebd59;
+	overflow: scroll;
 }
 
 .tracklist > li {
 	width: 100%;
 	padding: 10px 15px;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #2ebd59;
 	font-size: 1em;
-	background-color: #2c3e50;
+	background-color: #141317;
 	color: white;
 	text-align: left;
 }
 
+.tracklist > li > p {
+	margin: 0;
+}
+
 .albumlist > li {
 	text-align: left;
-    margin-left: 1.5em;
-    padding: 1.5em 0;
-    border-bottom: 1px solid #ccc;
+    padding: 1.5em 0 1.5em 1.5em;
+    border-bottom: 1px solid #2ebd59;
 }
 
 .albumlist img {
 	border-radius: 0;
-}
-
-.infobox span {
-	position: absolute;
-	right: 15px;
 }
 
 .related-artists {
@@ -545,7 +577,6 @@ input:focus {
 }
 
 #related {
-	border: 1px solid black;
 	/* for animation to work */
 	overflow: hidden;
 }
@@ -586,14 +617,14 @@ input:focus {
 
 .album-info {
 	width: 250px;
-	height: 180px;
 	display: inline-block;
 	vertical-align: top;
-	padding-left: 10px;
 }
 
-.album-info > p {
-	margin-top: 0;
+.album-info > p,
+.album-info > pre {
+	margin: .5em 0 .5em;
+	font-weight: 300;
 }
 
 
@@ -604,6 +635,16 @@ input:focus {
 	100% {
 		transform: translateX(-100%);
 	}
+}
+
+
+
+.aside .artist-img {
+	width: 100%;
+	height: 15em;
+	background-position: center;
+	background-size: cover;
+	opacity: .99;
 }
 
 

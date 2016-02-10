@@ -16,9 +16,20 @@ angular.module('discoveri', [])
 			}
 		}
 	})
-	.controller('MainCtrl', function($scope, $q, spotifyData) {
+	.controller('MainCtrl', function($scope, $q, $sce, spotifyData) {
 
 		$scope.tracksView = true;
+
+		$scope.trustSrc = function(src) {
+			return $sce.trustAsResourceUrl(src);
+		}
+
+
+		var stopAnimation = function() {
+			var related = document.querySelectorAll('#related li');
+			// add animation state paused
+			//related.style.animation-play-state = 'paused';
+		}
 
 		
 
@@ -40,7 +51,6 @@ angular.module('discoveri', [])
 		var callRelatedArtists = function(id) {
 			return spotifyData.getRelatedArtists(id).then(function(response) {
 				$scope.relatedArtists = response.data.artists;
-				console.log(response);
 				return id;
 			});
 		}
@@ -78,10 +88,12 @@ angular.module('discoveri', [])
 			.then(function(response) {
 				callRelatedArtists(response);
 				callTracks(response).then(function(response) {
-					callAlbums(response);
+					callAlbums(response)
 				});
 			});
 		}
+
+
 
 
 
