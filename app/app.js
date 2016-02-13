@@ -24,13 +24,6 @@ angular.module('discoveri', [])
 			return $sce.trustAsResourceUrl(src);
 		}
 
-
-		var stopAnimation = function() {
-			var related = document.querySelectorAll('#related li');
-			// add animation state paused
-			//related.style.animation-play-state = 'paused';
-		}
-
 		
 
 

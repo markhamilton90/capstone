@@ -5,10 +5,11 @@
 	<title>Discoveri</title>
 	<link rel="stylesheet" href="normalize.css">
 	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Caveat' rel='stylesheet' type='text/css'>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/jquery/dist/jquery.js"></script>
-	<!--<script src="bower_components/angular-route/angular-route.js"></script>-->
 	<script src="app.js"></script>
 	<script src="events.js"></script>
 </head>
@@ -18,7 +19,7 @@
 			<div class="aside">
 				<h2>{{ artist }}</h2>
 				<div class="artist-img" ng-style="{'background-image': 'url(' + images + ')'}"></div>
-				<p>Followers: <span id="followers">{{ followers | number }}</span></p>
+				<p>Followers : <span id="followers">{{ followers | number }}</span></p>
 			</div>
 			<div class="aside infobox" ng-show="tracksView">
 				<div class="toggle-display">
@@ -27,6 +28,7 @@
 				</div>
 				<ul class="tracklist">
 					<li ng-repeat="track in topTracks">
+						<i class="fa fa-play"></i>
 						<p>{{ track.name }}</p>
 						<audio ng-src="{{ trustSrc(track.preview_url) }}"></audio>
 					</li>
@@ -58,7 +60,7 @@
 		</div>
 		<div class="related-artists">
 			<ul id="related">
-				<li ng-repeat="artist in relatedArtists">
+				<li ng-repeat="artist in relatedArtists | limitTo:9">
 					<div ng-style="{
 						'background-image': 'url({{ artist.images[0].url }})'}"
 						ng-click="getArtistInfo(artist.name)">	
