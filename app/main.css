@@ -603,6 +603,7 @@ span.songs {
 
 #related {
 	/* for animation to work */
+	margin-top: 10px;
 	overflow: hidden;
 	width: 1000px;
 }
@@ -686,9 +687,64 @@ span.songs {
 
 
 
-/*  STILL NEED TO ADD MEDIA QUERIES -- */
+/*  TENTATIVE MEDIA QUERIES -- */
 
-/*  SCROLL-Y FUNCTIONALITY DOES NOT WORK ON SAFARI */
+@media screen and (max-width: 1028px) {
+	.banner-top {
+		width: auto;
+		border-bottom: 0;
+	}
+	.related-artists {
+		width: 35em;
+	}
+
+}
+
+@media screen and (max-width: 753px) {
+	.banner-top {
+		margin-bottom: 30px
+	}
+	.banner-top > h1 {
+		font-size: 3em;
+		margin-bottom: 15px;
+	}
+	.banner-top > form {
+		display: block;
+		margin-left: 64px;
+	}
+	.banner-top > form input {
+		margin-left: 0;
+	}
+	.related-artists {
+		width: 19.399em;
+	}
+	#related {
+		width: 15.399em;
+		margin-left: 64px;
+	}
+	#related > li {
+		margin: 0;
+		transform: none;
+		-webkit-animation: none;
+		-moz-animation: none;
+		-o-animation: none;
+		animation: none;
+	}
+	#related > li:nth-child(even) {
+		margin-left: 40px;
+	}
+	#related > li:nth-child(odd) {
+		margin-right: 40px;
+	}
+	#related > li > div {
+		width: 80px;
+		height: 80px;
+	}
+	#related > li > p {
+		width: 80px;
+		height: 35px;
+	}
+}
 
 
 
